@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ question }}{% endblock %}
+{% block stylesheets %}
+    <style>
+        .lead {
+            font-size:1.25rem;
+            font-weight:300;
+        }
+        .info-blc {
+            background-color: #bbcccf;
+            padding:12px;
+            -moz-box-shadow: 1px 2px 5px #656565;
+            -webkit-box-shadow: 1px 2px 5px #656565;
+            -o-box-shadow: 1px 2px 5px #656565;
+            box-shadow: 1px 2px 5px #656565;
+            filter:progid:DXImageTransform.Microsoft.Shadow(color='#6565', Direction=135, Strength=5)
+        }
+        .infos, .func, .coms {
+            font-weight: bold;
+        }
+        .infos {
+            font-size: 25px;
+            color:blue;
+        }
+        .func {
+            color: #ff7300;
+        }
+        .coms {
+            color:green;
+        }
+        .important {
+            color:red;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <h1>Bonjour</h1>
+
+    {# Les commentaires TWIG ne sont pas visibles dans le code source coté client ! #}
+    <!-- Par contre, les commentaires HTML sont visibles -->
+    {# Suit une boucle qui affichera 5 fois la question #}
+    <div>
+        <div class="info-blc">
+            <p class="infos">Astuces</p>
+            <p class="lead">Afficher directement un tableau sans boucle <i>FOR()</i></p>
+            <ul>
+                <li><span class="important">⚠ </span>Nécessite l'utilisation de la fonction <span class="func">join</span>() <br>
+                    <span class="important">☛ Il est possible de définir le "separator" ☚</span>
+                    <ul>
+                        <li>Exemple : <span class="func">join</span>(<span class="coms">" | ")</span> ☛ {% verbatim %}{{ answers|join(" | ") }}{% endverbatim %}<br>
+                            <p><i>Résultat</i> ☛ {{ answers|join(" | ") }}</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <p class="lead">Nombre d'élément dans le tableau answers :</p>
+            <ul>
+                <li><span class="important">⚠ </span>Avec le filtre <span class="func">length</span><br>
+                    <ul>
+                        <li>Exemple : {% verbatim %}{{ answers|length }}{% endverbatim %}<br>
+                            <p><i>Résultat</i> ☛ {{ answers|length }}</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <h2>Liste des réponses à la question : "{{ question }} ?"</h2>
+
+        <ul>
+            {% for answer in answers %}
+                <li>{{ loop.index }} - {{ answer }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
