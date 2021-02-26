@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,20 +17,23 @@ class QuestionController extends AbstractController
 {
 
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="accueil")
      * @return Response
      */
     public function homepage(): Response {
-        return new Response("<html lang='fr'><body><h1>Salut</h1></body>");
+        return $this->render('question/homepage.html.twig', []);
     }
 
     /**
+     *
      * @Route("/question/{slug}", name="question")
      * @param $slug
      * @return Response
      */
     public function show($slug): Response
     {
+        $expressionLanguage = new ExpressionLanguage();
+        dump($expressionLanguage->evaluate('"\\\\"'));
         return $this->render("question/show.html.twig", [
             'question' => ucwords(str_replace('-', ' ', $slug)),
             'answers' => [

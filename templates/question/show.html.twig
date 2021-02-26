@@ -1,75 +1,51 @@
-{% extends "base.html.twig" %}
-
-{% block title %}{{ question }}{% endblock %}
-{% block stylesheets %}
-    <style>
-        .lead {
-            font-size:1.25rem;
-            font-weight:300;
-        }
-        .info-blc {
-            background-color: #bbcccf;
-            padding:12px;
-            -moz-box-shadow: 1px 2px 5px #656565;
-            -webkit-box-shadow: 1px 2px 5px #656565;
-            -o-box-shadow: 1px 2px 5px #656565;
-            box-shadow: 1px 2px 5px #656565;
-            filter:progid:DXImageTransform.Microsoft.Shadow(color='#6565', Direction=135, Strength=5)
-        }
-        .infos, .func, .coms {
-            font-weight: bold;
-        }
-        .infos {
-            font-size: 25px;
-            color:blue;
-        }
-        .func {
-            color: #ff7300;
-        }
-        .coms {
-            color:green;
-        }
-        .important {
-            color:red;
-        }
-    </style>
-{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}Question: {{ question }}{% endblock %}
 {% block body %}
-    <h1>Bonjour</h1>
-
-    {# Les commentaires TWIG ne sont pas visibles dans le code source coté client ! #}
-    <!-- Par contre, les commentaires HTML sont visibles -->
-    {# Suit une boucle qui affichera 5 fois la question #}
-    <div>
-        <div class="info-blc">
-            <p class="infos">Astuces</p>
-            <p class="lead">Afficher directement un tableau sans boucle <i>FOR()</i></p>
-            <ul>
-                <li><span class="important">⚠ </span>Nécessite l'utilisation de la fonction <span class="func">join</span>() <br>
-                    <span class="important">☛ Il est possible de définir le "separator" ☚</span>
-                    <ul>
-                        <li>Exemple : <span class="func">join</span>(<span class="coms">" | ")</span> ☛ {% verbatim %}{{ answers|join(" | ") }}{% endverbatim %}<br>
-                            <p><i>Résultat</i> ☛ {{ answers|join(" | ") }}</p>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <p class="lead">Nombre d'élément dans le tableau answers :</p>
-            <ul>
-                <li><span class="important">⚠ </span>Avec le filtre <span class="func">length</span><br>
-                    <ul>
-                        <li>Exemple : {% verbatim %}{{ answers|length }}{% endverbatim %}<br>
-                            <p><i>Résultat</i> ☛ {{ answers|length }}</p>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="my-4">Question</h2>
+                <div style="box-shadow: 2px 3px 9px 4px rgba(0,0,0,0.04);">
+                    <div class="q-container-show p-4">
+                        <div class="row">
+                            <div class="col-2 text-center">
+                                <img src="{{ asset('images/tisha.png') }}" width="100" height="100" alt="tisha">
+                            </div>
+                            <div class="col">
+                                <h1 class="q-title-show">{{ question }}</h1>
+                                <div class="q-display p-3">
+                                    <i class="fa fa-quote-left mr-3"></i>
+                                    <p class="d-inline">I've been turned into a cat, any thoughts on how to turn back? While I'm adorable, I don't really care for cat food.</p>
+                                    <p class="pt-4"><strong>--Tisha</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h2>Liste des réponses à la question : "{{ question }} ?"</h2>
-
-        <ul>
+        <div class="d-flex justify-content-between my-4">
+            <h2 class="">Answers <span style="font-size:1.2rem;">({{ answers|length }})</span></h2>
+            <button class="btn btn-sm btn-secondary">Submit an Answer</button>
+        </div>
+        <ul class="list-unstyled">
             {% for answer in answers %}
-                <li>{{ loop.index }} - {{ answer }}</li>
+                <li class="mb-4">
+                    <div class="d-flex justify-content-center">
+                        <div class="mr-2 pt-2">
+                            <img src="{{ asset("images/tisha.png") }}" width="50" height="50" alt="tisha">
+                        </div>
+                        <div class="mr-3 pt-2">
+                            {{ answer }}
+                            <p>-- Mallory</p>
+                        </div>
+                        <div class="vote-arrows flex-fill pt-2" style="min-width: 90px;">
+                            <a class="vote-up" href="#"><i class="far fa-arrow-alt-circle-up"></i></a>
+                            <a class="vote-down" href="#"><i class="far fa-arrow-alt-circle-down"></i></a>
+                            <span>+ 6</span>
+                        </div>
+                    </div>
+                </li>
             {% endfor %}
         </ul>
     </div>
